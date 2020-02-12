@@ -1,4 +1,4 @@
-package main.java.make_queue;
+package main.java.make_outbound_call;
 
 import java.util.Arrays;
 import org.springframework.boot.SpringApplication;

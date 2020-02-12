@@ -1,11 +1,4 @@
-/* 
- * AFTER RUNNING PROJECT WITH COMMAND: 
- * `gradle build && java -Dserver.port=0080 -jar build/libs/gs-spring-boot-0.1.0.jar`
- * RUN CURL COMMAND:
- * `curl {baseUrl}/makeQueue`
- */
-
-package main.java.make_queue;
+package main.java.make_outbound_call;
 
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RequestMapping;
