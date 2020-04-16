@@ -1,6 +1,6 @@
 # Java - Make Outbound Call tutorial
 
-This project serves as a guide to help you build an application with FreeClimb. View this tutorial on [FreeClimb.com](https://docs.freeclimb.com/docs/make-a-queue#section-java). Specifically, the project will:
+This project serves as a guide to help you build an application with FreeClimb. View this tutorial on [FreeClimb.com](https://docs.freeclimb.com/docs/how-to-make-an-outbound-call#section-java). Specifically, the project will:
 
 - Makes an outbound call
 
