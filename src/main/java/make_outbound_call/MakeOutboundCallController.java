@@ -14,12 +14,12 @@ public class MakeOutboundCallController {
 
   public static void run() {
     String accountId = System.getenv("ACCOUNT_ID");
-    String authToken = System.getenv("AUTH_TOKEN");
+    String apiKey = System.getenv("API_KEY");
     String applicationId = System.getenv("APPLICATION_ID");
     String toNumber = System.getenv("TO_PHONE_NUMBER");
     String fromNumber = System.getenv("FREECLIMB_PHONE_NUMBER");
     try {
-      client = new FreeClimbClient(accountId, authToken);
+      client = new FreeClimbClient(accountId, apiKey);
     } catch (FreeClimbException e) {
       // handle exception
     }
