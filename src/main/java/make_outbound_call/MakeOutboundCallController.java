@@ -2,15 +2,17 @@ package main.java.make_outbound_call;
 
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RequestMapping;
-import com.vailsys.freeclimb.api.FreeClimbClient;
-import com.vailsys.freeclimb.api.FreeClimbException;
-import com.vailsys.freeclimb.percl.Say;
-import com.vailsys.freeclimb.percl.PerCLScript;
-import com.vailsys.freeclimb.api.call.Call;
+import org.springframework.web.bind.annotation.RequestMethod;
+
+import com.github.freeclimbapi.ApiClient;
+import com.github.freeclimbapi.ApiException;
+import com.github.freeclimbapi.Configuration;
+import com.github.freeclimbapi.auth.*;
+import com.github.freeclimbapi.models.*;
+import com.github.freeclimbapi.DefaultApi;
 
 @RestController
 public class MakeOutboundCallController {
-  private static FreeClimbClient client;
 
   public static void run() {
     String accountId = System.getenv("ACCOUNT_ID");
@@ -18,32 +20,38 @@ public class MakeOutboundCallController {
     String applicationId = System.getenv("APPLICATION_ID");
     String toNumber = System.getenv("TO_PHONE_NUMBER");
     String fromNumber = System.getenv("FREECLIMB_PHONE_NUMBER");
+
+    ApiClient defaultClient = Configuration.getDefaultApiClient();
+    defaultClient.setBasePath("https://www.freeclimb.com/apiserver");
+    defaultClient.setAccountId(accountId);
+    defaultClient.setApiKey(apiKey);
+
+    DefaultApi apiInstance = new DefaultApi(defaultClient);
+
+    MakeCallRequest makeCallRequest = new MakeCallRequest();
+    makeCallRequest.setFrom(fromNumber);
+    makeCallRequest.setTo(toNumber);
+    makeCallRequest.setApplicationId(applicationId);
+
     try {
-      client = new FreeClimbClient(accountId, apiKey);
-    } catch (FreeClimbException e) {
-      // handle exception
+      apiInstance.makeACall(makeCallRequest);
+    } catch (ApiException e) {
+      System.err.println("Exception when calling DefaultApi#sendAnSmsMessage");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
     }
 
-    outDial(fromNumber, toNumber, applicationId);
-  }
-
-  public static void outDial(String fromNumber, String toNumber, String applicationId) {
-    try {
-      // Create FreeClimbClient object
-      Call call = client.calls.create(toNumber, fromNumber, applicationId);
-    } catch (FreeClimbException ex) {
-      // Exception throw upon failure
-      System.out.print(ex);
-    }
   }
 
   // set url in call connect field in FreeClimb dashboard
-  @RequestMapping("/InboundCall")
-  public String respond() {
-    PerCLScript script = new PerCLScript();
+  @RequestMapping(value = { "/InboundCall" }, method = RequestMethod.POST)
+  public String respond() throws Exception {
+    PerclScript script = new PerclScript();
     Say say = new Say("You just made a call with the FreeClimb API!");
-    // Add PerCL play script to PerCL container
-    script.add(say);
+    script.addCommand(say);
+
     return script.toJson();
   }
 }
