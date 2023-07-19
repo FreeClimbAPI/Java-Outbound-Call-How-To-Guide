@@ -49,8 +49,8 @@ public class MakeOutboundCallController {
   @RequestMapping(value = { "/InboundCall" }, method = RequestMethod.POST)
   public String respond() throws Exception {
     PerclScript script = new PerclScript();
-    Say sayHelloWorld = new Say().text("Hello World!");
-    script.addCommand(sayHelloWorld);
+    Say say = new Say("You just made a call with the FreeClimb API!");
+    script.addCommand(say);
 
     return script.toJson();
   }
