@@ -12,7 +12,7 @@ buildscript {
     }
    //Add the dependency
     dependencies {
-        classpath "org.springframework.boot:spring-boot-gradle-plugin:2.1.6.RELEASE"
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:2.6.0")
     }
 }
 
@@ -23,8 +23,7 @@ apply plugin: 'org.springframework.boot'
 apply plugin: 'io.spring.dependency-management'
 
 bootJar {
-    baseName = 'gs-spring-boot'
-    version =  '0.1.0'
+    version =  '3.0.6'
 }
 
 repositories {
@@ -38,8 +37,25 @@ targetCompatibility = 1.8
 dependencies {
     implementation "org.springframework.boot:spring-boot-starter-web"
     testImplementation "junit:junit"
-    implementation 'com.github.FreeClimbAPI:java-sdk:3.0.0'
+    implementation 'com.github.freeclimbapi:java-sdk:5.4.0'
+    implementation("com.squareup.okhttp3:okhttp:4.9.3")
+    implementation("com.squareup.okhttp3:logging-interceptor:4.9.3")
 }
+
+jar {
+    duplicatesStrategy(DuplicatesStrategy.EXCLUDE)
+    manifest {
+        attributes(
+        'Main-Class': 'main.java.make_outbound_call.Application'
+        )
+    }
+    from {
+        configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
+    }
+}
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
 
 sourceSets {
     main {
