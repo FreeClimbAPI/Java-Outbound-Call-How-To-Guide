@@ -1,6 +1,6 @@
-# Java - Make Outbound Call tutorial
+# Java - Make Outbound Call How-To Guide
 
-This project serves as a guide to help you build an application with FreeClimb. View this tutorial on [FreeClimb.com](https://docs.freeclimb.com/docs/how-to-make-an-outbound-call#section-java). Specifically, the project will:
+This project serves as a guide to help you build an application with FreeClimb. View this how-to guide on [FreeClimb.com](https://docs.freeclimb.com/docs/how-to-make-an-outbound-call#section-java). Specifically, the project will:
 
 - Makes an outbound call
 
@@ -8,7 +8,7 @@ This project serves as a guide to help you build an application with FreeClimb. 
 
 To get started using a FreeClimb account, follow the instructions [here](https://docs.freeclimb.com/docs/getting-started-with-freeclimb).
 
-## Setting up the Tutorial
+## Setting up the how-to guide
 
 1. Configure environment variables.
 
@@ -20,7 +20,7 @@ To get started using a FreeClimb account, follow the instructions [here](https:/
    | TO_PHONE_NUMBER         | The phone number which is being called. [Must be a verified phone number](https://docs.freeclimb.com/docs/using-your-trial-account#section-verifying-outbound-numbers) (for trial users) and in E.164 format.             |
    | FREECLIMB_PHONE_NUMBER | The FreeClimb number that is being used to make a phone call. To learn more go [here](https://docs.freeclimb.com/docs/getting-started-with-freeclimb#section-2-get-a-phone-number) |
 
-## Building and Runnning the Tutorial
+## Building and Runnning the how-to guide
 
 1. Build and run the application using command:
 
